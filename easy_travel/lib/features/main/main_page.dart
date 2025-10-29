@@ -1,3 +1,4 @@
+import 'package:easy_travel/features/home/home_page.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -33,7 +34,7 @@ class _MainPageState extends State<MainPage> {
           ),
         ],
       ),
-      body: Placeholder(),
+      body: const SafeArea(child: HomePage()),
     );
   }
 
