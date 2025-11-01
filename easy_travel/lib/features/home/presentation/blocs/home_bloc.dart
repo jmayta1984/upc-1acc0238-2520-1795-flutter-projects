@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:easy_travel/core/enums/status.dart';
 import 'package:easy_travel/features/home/data/destination_service.dart';
 import 'package:easy_travel/features/home/domain/destination.dart';
 import 'package:easy_travel/features/home/presentation/blocs/home_event.dart';
@@ -20,14 +21,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       return;
     }
 
-    emit(state.copytWith(isLoading: true, selectedCategory: event.category));
+    emit(
+      state.copytWith(status: Status.loading, selectedCategory: event.category),
+    );
     try {
       List<Destination> destinations = await service.getDestinations(
         event.category,
       );
-      emit(state.copytWith(isLoading: false, destinations: destinations));
+      emit(state.copytWith(status: Status.success, destinations: destinations));
     } catch (e) {
-      emit(state.copytWith(isLoading: false, message: e.toString()));
+      emit(state.copytWith(status: Status.failure, message: e.toString()));
     }
   }
 }

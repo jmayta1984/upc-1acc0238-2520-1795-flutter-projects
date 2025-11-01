@@ -1,3 +1,4 @@
+import 'package:easy_travel/core/enums/status.dart';
 import 'package:easy_travel/features/home/domain/category.dart';
 import 'package:easy_travel/features/home/domain/destination.dart';
 import 'package:easy_travel/features/home/presentation/blocs/home_bloc.dart';
@@ -44,37 +45,41 @@ class HomePage extends StatelessWidget {
               BlocSelector<
                 HomeBloc,
                 HomeState,
-                (bool, List<Destination>, String)
+                (Status, List<Destination>, String?)
               >(
                 selector: (state) =>
-                    (state.isLoading, state.destinations, state.message),
+                    (state.status, state.destinations, state.message),
                 builder: (context, state) {
-                  final (isLoading, destinations, message) = state;
+                  final (status, destinations, message) = state;
 
-                  if (isLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
+                  switch (status) {
+                    case Status.loading:
+                      return const Center(child: CircularProgressIndicator());
 
-                  if (message.isNotEmpty) {
-                    return Center(child: Text(message));
-                  }
+                    case Status.failure:
+                      return Center(child: Text(message ?? ""));
 
-                  return ListView.builder(
-                    itemCount: destinations.length,
-                    itemBuilder: (context, index) {
-                      final Destination destination = destinations[index];
-                      return GestureDetector(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                DestinationDetailPage(destination: destination),
-                          ),
-                        ),
-                        child: DestinationCard(destination: destination),
+                    case Status.success:
+                      return ListView.builder(
+                        itemCount: destinations.length,
+                        itemBuilder: (context, index) {
+                          final Destination destination = destinations[index];
+                          return GestureDetector(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DestinationDetailPage(
+                                  destination: destination,
+                                ),
+                              ),
+                            ),
+                            child: DestinationCard(destination: destination),
+                          );
+                        },
                       );
-                    },
-                  );
+                    default:
+                      return SizedBox.shrink();
+                  }
                 },
               ),
         ),
