@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:easy_travel/core/enums/status.dart';
 import 'package:easy_travel/features/home/data/destination_service.dart';
-import 'package:easy_travel/features/home/domain/destination.dart';
+import 'package:easy_travel/features/home/domain/models/destination.dart';
 import 'package:easy_travel/features/home/presentation/blocs/home_event.dart';
 import 'package:easy_travel/features/home/presentation/blocs/home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

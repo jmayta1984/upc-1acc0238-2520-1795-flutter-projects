@@ -1,4 +1,4 @@
-import 'package:easy_travel/features/home/domain/category.dart';
+import 'package:easy_travel/features/home/domain/models/category.dart';
 
 abstract class HomeEvent {
   const HomeEvent();
