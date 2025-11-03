@@ -1,3 +1,4 @@
+import 'package:easy_travel/features/home/data/models/destination_dto.dart';
 import 'package:easy_travel/features/home/data/services/destination_service.dart';
 import 'package:easy_travel/features/home/domain/models/category.dart';
 import 'package:easy_travel/features/home/domain/models/destination.dart';
@@ -9,9 +10,8 @@ class DestinationRepositoryImpl implements DestinationRepository {
   const DestinationRepositoryImpl({required this.service});
 
   @override
-  Future<List<Destination>> getDestinations(CategoryType category) {
-    return service
-        .getDestinations(category)
-        .then((dtos) => dtos.map((dto) => dto.toDomain()).toList());
+  Future<List<Destination>> getDestinations(CategoryType category) async {
+    final List<DestinationDto> dtos = await service.getDestinations(category);
+    return dtos.map((dto) => dto.toDomain()).toList();
   }
 }
