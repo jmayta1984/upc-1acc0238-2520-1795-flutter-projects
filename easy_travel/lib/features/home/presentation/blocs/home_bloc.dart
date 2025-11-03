@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'package:easy_travel/core/enums/status.dart';
-import 'package:easy_travel/features/home/data/destination_service.dart';
 import 'package:easy_travel/features/home/domain/models/destination.dart';
+import 'package:easy_travel/features/home/domain/repositories/destination_repository.dart';
 import 'package:easy_travel/features/home/presentation/blocs/home_event.dart';
 import 'package:easy_travel/features/home/presentation/blocs/home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final DestinationService service;
-  HomeBloc({required this.service}) : super(HomeState()) {
+  final DestinationRepository repository;
+  HomeBloc({required this.repository}) : super(HomeState()) {
     on<GetDestinationsByCategory>(_getDestinationsByCategory);
   }
 
@@ -25,7 +25,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       state.copytWith(status: Status.loading, selectedCategory: event.category),
     );
     try {
-      List<Destination> destinations = await service.getDestinations(
+      List<Destination> destinations = await repository.getDestinations(
         event.category,
       );
       emit(state.copytWith(status: Status.success, destinations: destinations));
