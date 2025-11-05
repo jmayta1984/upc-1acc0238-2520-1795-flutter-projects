@@ -1,4 +1,7 @@
-import 'package:easy_travel/features/auth/register_page.dart';
+import 'package:easy_travel/features/auth/data/repositories/login_repository_impl.dart';
+import 'package:easy_travel/features/auth/data/services/login_service.dart';
+import 'package:easy_travel/features/auth/presentation/blocs/login_bloc.dart';
+import 'package:easy_travel/features/auth/presentation/pages/login_page.dart';
 import 'package:easy_travel/core/ui/theme.dart';
 import 'package:easy_travel/features/home/data/repositories/destination_repository_impl.dart';
 import 'package:easy_travel/features/home/data/services/destination_service.dart';
@@ -23,17 +26,28 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = appMaterialTheme;
 
-    return BlocProvider(
-      create: (context) => HomeBloc(
-        repository: DestinationRepositoryImpl(service: DestinationService()),
-      )..add(GetDestinationsByCategory(category: CategoryType.all)),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => HomeBloc(
+            repository: DestinationRepositoryImpl(
+              service: DestinationService(),
+            ),
+          )..add(GetDestinationsByCategory(category: CategoryType.all)),
+        ),
+
+        BlocProvider(
+          create: (context) => LoginBloc(
+            repository: LoginRepositoryImpl(service: LoginService()),
+          ),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: theme.light(),
         darkTheme: theme.dark(),
-        themeMode: ThemeMode.system,
         highContrastTheme: theme.lightHighContrast(),
-        home: const Scaffold(body: SafeArea(child: RegisterPage())),
+        home: const Scaffold(body: LoginPage()),
       ),
     );
   }
