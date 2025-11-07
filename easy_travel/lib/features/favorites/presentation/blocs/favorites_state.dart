@@ -1,29 +1,24 @@
 import 'package:easy_travel/core/enums/status.dart';
-import 'package:easy_travel/domain/models/category.dart';
 import 'package:easy_travel/domain/models/destination.dart';
 
-class HomeState {
+class FavoritesState {
   final Status status;
-  final CategoryType selectedCategory;
   final List<Destination> destinations;
   final String? message;
 
-  const HomeState({
+  const FavoritesState({
     this.status = Status.initial,
-    this.selectedCategory = CategoryType.all,
     this.destinations = const [],
     this.message,
   });
 
-  HomeState copytWith({
+  FavoritesState copyWith({
     Status? status,
-    CategoryType? selectedCategory,
     List<Destination>? destinations,
     String? message,
   }) {
-    return HomeState(
+    return FavoritesState(
       status: status ?? this.status,
-      selectedCategory: selectedCategory ?? this.selectedCategory,
       destinations: destinations ?? this.destinations,
       message: message ?? this.message,
     );

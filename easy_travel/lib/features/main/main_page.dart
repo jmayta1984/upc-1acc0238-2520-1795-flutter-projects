@@ -1,3 +1,4 @@
+import 'package:easy_travel/features/favorites/presentation/pages/favorites_page.dart';
 import 'package:easy_travel/features/home/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
+  final List<Widget> _pages = const [HomePage(), FavoritesPage(), Text("Profile")];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +36,7 @@ class _MainPageState extends State<MainPage> {
           ),
         ],
       ),
-      body: const SafeArea(child: HomePage()),
+      body:  SafeArea(child: _pages[_selectedIndex]),
     );
   }
 

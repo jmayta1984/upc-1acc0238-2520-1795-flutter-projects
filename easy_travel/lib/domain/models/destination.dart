@@ -10,13 +10,4 @@ class Destination {
     required this.posterPath,
     required this.overview,
   });
-
-  factory Destination.fromJson(Map<String, dynamic> json) {
-    return Destination(
-      id: json['id'],
-      title: json['title'],
-      posterPath: json['posterPath'],
-      overview: json['overview'],
-    );
-  }
 }

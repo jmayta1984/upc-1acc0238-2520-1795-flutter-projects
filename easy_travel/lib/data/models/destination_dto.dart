@@ -1,4 +1,4 @@
-import 'package:easy_travel/features/home/domain/models/destination.dart';
+import 'package:easy_travel/domain/models/destination.dart';
 
 class DestinationDto {
   final int id;

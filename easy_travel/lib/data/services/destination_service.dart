@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:easy_travel/core/contstants/api_constants.dart';
-import 'package:easy_travel/features/home/data/models/destination_dto.dart';
-import 'package:easy_travel/features/home/domain/models/category.dart';
+import 'package:easy_travel/data/models/destination_dto.dart';
+import 'package:easy_travel/domain/models/category.dart';
 import 'package:http/http.dart' as http;
 
 class DestinationService {

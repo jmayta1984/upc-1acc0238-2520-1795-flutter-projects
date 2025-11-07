@@ -1,6 +1,6 @@
 import 'package:easy_travel/core/enums/status.dart';
-import 'package:easy_travel/features/home/domain/models/category.dart';
-import 'package:easy_travel/features/home/domain/models/destination.dart';
+import 'package:easy_travel/domain/models/category.dart';
+import 'package:easy_travel/domain/models/destination.dart';
 import 'package:easy_travel/features/home/presentation/blocs/home_bloc.dart';
 import 'package:easy_travel/features/home/presentation/blocs/home_event.dart';
 import 'package:easy_travel/features/home/presentation/blocs/home_state.dart';
