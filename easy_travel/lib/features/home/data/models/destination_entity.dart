@@ -1,3 +1,5 @@
+import 'package:easy_travel/shared/domain/models/destination.dart';
+
 class DestinationEntity {
   final int id;
   final String title;
@@ -26,6 +28,24 @@ class DestinationEntity {
       title: map['title'],
       posterPath: map['poster_path'],
       overview: map['overview'],
+    );
+  }
+
+  factory DestinationEntity.fromDomain(Destination destination) {
+    return DestinationEntity(
+      id: destination.id,
+      title: destination.title,
+      posterPath: destination.posterPath,
+      overview: destination.overview,
+    );
+  }
+
+  Destination toDomain() {
+    return Destination(
+      id: id,
+      title: title,
+      posterPath: posterPath,
+      overview: overview,
     );
   }
 }

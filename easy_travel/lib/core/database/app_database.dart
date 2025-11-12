@@ -1,3 +1,4 @@
+import 'package:easy_travel/core/constants/database_constants.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -17,17 +18,20 @@ class AppDatabase {
   }
 
   Future<Database> _initDatabase() async {
-    final String path = join(await getDatabasesPath(), 'easy_travel.db');
+    final String path = join(
+      await getDatabasesPath(),
+      DatabaseConstants.databaseName,
+    );
 
     return await openDatabase(
       path,
-      version: 1,
+      version: DatabaseConstants.databaseVersion,
       onCreate: (db, version) {
-        db.execute('''CREATE TABLE destinations ( 
+        db.execute('''CREATE TABLE ${DatabaseConstants.destinationsTable} ( 
       id INTEGER PRIMARY KEY,
       title TEXT, 
-      poster_path, 
-      TEXT, overview TEXT)''');
+      poster_path TEXT, 
+      overview TEXT)''');
       },
     );
   }

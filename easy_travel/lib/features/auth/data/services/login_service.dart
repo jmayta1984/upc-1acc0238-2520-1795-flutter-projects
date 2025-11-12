@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:easy_travel/core/contstants/api_constants.dart';
+import 'package:easy_travel/core/constants/api_constants.dart';
 import 'package:easy_travel/features/auth/data/models/user_dto.dart';
 
 import 'package:http/http.dart' as http;

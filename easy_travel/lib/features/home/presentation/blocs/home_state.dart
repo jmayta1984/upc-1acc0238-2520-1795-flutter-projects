@@ -15,7 +15,7 @@ class HomeState {
     this.message,
   });
 
-  HomeState copytWith({
+  HomeState copyWith({
     Status? status,
     CategoryType? selectedCategory,
     List<Destination>? destinations,

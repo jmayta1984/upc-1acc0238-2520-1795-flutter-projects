@@ -1,3 +1,5 @@
+import 'package:easy_travel/shared/domain/models/destination.dart';
+
 abstract class FavoritesEvent {
   const FavoritesEvent();
 }
@@ -7,6 +9,6 @@ class GetAllFavorites extends FavoritesEvent {
 }
 
 class RemoveFavorite extends FavoritesEvent {
-  final int id;
-  const RemoveFavorite({required this.id});
+  final Destination destination;
+  const RemoveFavorite({required this.destination});
 }
