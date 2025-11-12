@@ -1,5 +1,5 @@
 import 'package:easy_travel/core/database/app_database.dart';
-import 'package:easy_travel/data/models/destination_entity.dart';
+import 'package:easy_travel/features/home/data/models/destination_entity.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DestinationDao {
