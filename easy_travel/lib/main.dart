@@ -6,8 +6,11 @@ import 'package:easy_travel/core/ui/theme.dart';
 import 'package:easy_travel/features/favorites/presentation/blocs/favorites_bloc.dart';
 import 'package:easy_travel/features/favorites/presentation/blocs/favorites_event.dart';
 import 'package:easy_travel/features/home/data/dao/destination_dao.dart';
+import 'package:easy_travel/features/home/data/repositories/comment_repository_impl.dart';
 import 'package:easy_travel/features/home/data/repositories/destination_repository_impl.dart';
+import 'package:easy_travel/features/home/data/services/comment_service.dart';
 import 'package:easy_travel/features/home/data/services/destination_service.dart';
+import 'package:easy_travel/features/home/presentation/blocs/comment_bloc.dart';
 import 'package:easy_travel/shared/domain/models/category.dart';
 import 'package:easy_travel/features/home/presentation/blocs/home_bloc.dart';
 import 'package:easy_travel/features/home/presentation/blocs/home_event.dart';
@@ -52,6 +55,11 @@ class MainApp extends StatelessWidget {
           create: (context) =>
               FavoritesBloc(repository: destinationRepository)
                 ..add(GetAllFavorites()),
+        ),
+        BlocProvider(
+          create: (context) => CommentBloc(
+            repository: CommentRepositoryImpl(service: CommentService()),
+          ),
         ),
       ],
       child: MaterialApp(

@@ -1,4 +1,6 @@
 import 'package:easy_travel/core/enums/status.dart';
+import 'package:easy_travel/features/home/presentation/blocs/comment_bloc.dart';
+import 'package:easy_travel/features/home/presentation/blocs/comment_event.dart';
 import 'package:easy_travel/shared/domain/models/category.dart';
 import 'package:easy_travel/shared/domain/models/destination.dart';
 import 'package:easy_travel/features/home/presentation/blocs/home_bloc.dart';
@@ -65,14 +67,22 @@ class HomePage extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final Destination destination = destinations[index];
                           return GestureDetector(
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DestinationDetailPage(
-                                  destination: destination,
+                            onTap: () {
+                              context.read<CommentBloc>().add(
+                                GetCommentsByDestination(
+                                  destinationId: destination.id,
                                 ),
-                              ),
-                            ),
+                              );
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DestinationDetailPage(
+                                    destination: destination,
+                                  ),
+                                ),
+                              );
+                            },
                             child: DestinationCard(destination: destination),
                           );
                         },
