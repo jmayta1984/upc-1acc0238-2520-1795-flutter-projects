@@ -1,3 +1,4 @@
+import 'package:easy_travel/core/storage/token_storage.dart';
 import 'package:easy_travel/features/auth/data/services/login_service.dart';
 import 'package:easy_travel/features/auth/domain/models/user.dart';
 import 'package:easy_travel/features/auth/domain/repositories/login_repository.dart';
@@ -11,6 +12,7 @@ class LoginRepositoryImpl implements LoginRepository {
   Future<User> login(String email, String password) async {
     try {
       final userDto = await service.login(email, password);
+      await TokenStorage().save(userDto.token);
       return userDto.toDomain();
     } catch (e) {
       throw Exception('Unexpected error while login: $e');

@@ -17,8 +17,6 @@ class LoginService {
         uri,
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'email': email, 'password': password}),
-
-        
       );
 
       if (response.statusCode == HttpStatus.ok) {
@@ -26,7 +24,7 @@ class LoginService {
 
         return UserDto.fromJson(json);
       }
-       throw HttpException(
+      throw HttpException(
         'Unexpected HTTP status: ${response.statusCode} - ${response.reasonPhrase}',
       );
     } catch (e) {

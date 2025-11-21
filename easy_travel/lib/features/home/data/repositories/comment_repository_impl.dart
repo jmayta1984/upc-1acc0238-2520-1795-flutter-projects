@@ -15,4 +15,9 @@ class CommentRepositoryImpl implements CommentRepository {
     );
     return dtos.map((dto) => dto.toDomain()).toList();
   }
+
+  @override
+  Future<void> addComment(int destinationId, String comment, int rating) async {
+    service.addComment(destinationId, comment, rating);
+  }
 }

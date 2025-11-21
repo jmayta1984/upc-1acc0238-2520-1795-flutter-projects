@@ -8,14 +8,13 @@ import 'package:http/http.dart' as http;
 
 class DestinationService {
   Future<List<DestinationDto>> getDestinations(CategoryType category) async {
+    final uri = Uri.parse(ApiConstants.baseUrl).replace(
+      path: ApiConstants.destinationsEndpoint,
+      queryParameters: category != CategoryType.all
+          ? {'type': category.label}
+          : null,
+    );
     try {
-      final uri = Uri.parse(ApiConstants.baseUrl).replace(
-        path: ApiConstants.destinationsEndpoint,
-        queryParameters: category != CategoryType.all
-            ? {'type': category.label}
-            : null,
-      );
-
       final response = await http.get(uri);
       if (response.statusCode == HttpStatus.ok) {
         final json = jsonDecode(response.body);
