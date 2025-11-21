@@ -18,6 +18,7 @@ class CommentRepositoryImpl implements CommentRepository {
 
   @override
   Future<void> addComment(int destinationId, String comment, int rating) async {
-    service.addComment(destinationId, comment, rating);
+    await service.addComment(destinationId, comment, rating);
+    
   }
 }

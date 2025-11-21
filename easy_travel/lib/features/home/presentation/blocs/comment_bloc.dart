@@ -32,6 +32,8 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
     AddComment event,
     Emitter<CommentState> emit,
   ) async {
+    emit(state.copyWith(status: Status.loading));
+
     try {
       await repository.addComment(
         event.destinationId,

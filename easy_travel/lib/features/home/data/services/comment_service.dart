@@ -37,7 +37,7 @@ class CommentService {
     }
   }
 
-  void addComment(int destinationId, String comment, int rating) async {
+  Future<void> addComment(int destinationId, String comment, int rating) async {
     final Uri uri = Uri.parse(
       ApiConstants.baseUrl,
     ).replace(path: ApiConstants.commentsEndpoint);
