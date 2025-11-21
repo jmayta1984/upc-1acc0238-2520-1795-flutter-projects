@@ -1,8 +1,10 @@
 import 'package:easy_travel/features/auth/data/repositories/login_repository_impl.dart';
 import 'package:easy_travel/features/auth/data/services/login_service.dart';
+import 'package:easy_travel/features/auth/presentation/blocs/auth_bloc.dart';
+import 'package:easy_travel/features/auth/presentation/blocs/auth_event.dart';
 import 'package:easy_travel/features/auth/presentation/blocs/login_bloc.dart';
-import 'package:easy_travel/features/auth/presentation/pages/login_page.dart';
 import 'package:easy_travel/core/ui/theme.dart';
+import 'package:easy_travel/features/auth/presentation/pages/splash_page.dart';
 import 'package:easy_travel/features/favorites/presentation/blocs/favorites_bloc.dart';
 import 'package:easy_travel/features/favorites/presentation/blocs/favorites_event.dart';
 import 'package:easy_travel/features/home/data/dao/destination_dao.dart';
@@ -61,13 +63,14 @@ class MainApp extends StatelessWidget {
             repository: CommentRepositoryImpl(service: CommentService()),
           ),
         ),
+        BlocProvider(create: (context) => AuthBloc()..add(AppStarted())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: theme.light(),
         darkTheme: theme.dark(),
         highContrastTheme: theme.lightHighContrast(),
-        home: const Scaffold(body: LoginPage()),
+        home: SplashPage(),
       ),
     );
   }

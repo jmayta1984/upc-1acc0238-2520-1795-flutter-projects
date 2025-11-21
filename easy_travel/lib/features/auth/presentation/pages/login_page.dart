@@ -29,82 +29,84 @@ class LoginPage extends StatelessWidget {
           default:
         }
       },
-      child: Stack(
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsetsGeometry.all(8.0),
-
-                child: TextField(
-                  onChanged: (value) => context.read<LoginBloc>().add(
-                    OnEmailChanged(email: value),
-                  ),
-                  autocorrect: false,
-                  decoration: InputDecoration(
-                    hintText: "Email",
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-              ),
-
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: BlocSelector<LoginBloc, LoginState, bool>(
-                  selector: (state) => state.isPasswordVisible,
-                  builder: (context, isPasswordVisible) => TextField(
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsetsGeometry.all(8.0),
+        
+                  child: TextField(
                     onChanged: (value) => context.read<LoginBloc>().add(
-                      OnPasswordChanged(password: value),
+                      OnEmailChanged(email: value),
                     ),
                     autocorrect: false,
                     decoration: InputDecoration(
-                      hintText: "Password",
+                      hintText: "Email",
                       border: OutlineInputBorder(),
-                      suffixIcon: IconButton(
-                        onPressed: () => context.read<LoginBloc>().add(
-                          TogglePasswordVisibility(),
-                        ),
-                        icon: Icon(
-                          !isPasswordVisible
-                              ? Icons.visibility_off
-                              : Icons.visibility,
+                    ),
+                  ),
+                ),
+        
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: BlocSelector<LoginBloc, LoginState, bool>(
+                    selector: (state) => state.isPasswordVisible,
+                    builder: (context, isPasswordVisible) => TextField(
+                      onChanged: (value) => context.read<LoginBloc>().add(
+                        OnPasswordChanged(password: value),
+                      ),
+                      autocorrect: false,
+                      decoration: InputDecoration(
+                        hintText: "Password",
+                        border: OutlineInputBorder(),
+                        suffixIcon: IconButton(
+                          onPressed: () => context.read<LoginBloc>().add(
+                            TogglePasswordVisibility(),
+                          ),
+                          icon: Icon(
+                            !isPasswordVisible
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
                         ),
                       ),
+                      obscureText: !isPasswordVisible,
                     ),
-                    obscureText: !isPasswordVisible,
                   ),
                 ),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  height: 48,
-                  width: double.infinity,
-                  child: FilledButton(
-                    onPressed: () => context.read<LoginBloc>().add(Login()),
-                    child: Text("Login"),
+        
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    height: 48,
+                    width: double.infinity,
+                    child: FilledButton(
+                      onPressed: () => context.read<LoginBloc>().add(Login()),
+                      child: Text("Login"),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          BlocSelector<LoginBloc, LoginState, bool>(
-            selector: (state) => state.status == Status.loading,
-            builder: (context, isLoading) {
-              if (isLoading) {
-                return Container(
-                  color: Theme.of(
-                    context,
-                  ).colorScheme.primaryContainer.withValues(alpha: 0.5),
-                  child: Center(child: CircularProgressIndicator()),
-                );
-              }
-              return SizedBox.shrink();
-            },
-          ),
-        ],
+              ],
+            ),
+            BlocSelector<LoginBloc, LoginState, bool>(
+              selector: (state) => state.status == Status.loading,
+              builder: (context, isLoading) {
+                if (isLoading) {
+                  return Container(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.primaryContainer.withValues(alpha: 0.5),
+                    child: Center(child: CircularProgressIndicator()),
+                  );
+                }
+                return SizedBox.shrink();
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
