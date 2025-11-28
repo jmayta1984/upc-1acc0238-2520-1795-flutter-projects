@@ -1,4 +1,6 @@
 import 'package:easy_meal/domain/models/category.dart';
+import 'package:easy_meal/presentation/widgets/meals_list.dart';
+import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 
 class CategoryPage extends StatelessWidget {
@@ -22,10 +24,56 @@ class CategoryPage extends StatelessWidget {
           ),
         ],
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              category.description,
-              style: Theme.of(context).textTheme.bodyLarge,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: double.infinity,
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Description',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        ExpandableText(
+                          category.description,
+                          expandText: 'Show more',
+                          collapseText: 'Show less',
+                          maxLines: 3,
+                          animation: true,
+
+                          linkColor: Theme.of(context).colorScheme.primary,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Meals',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        Expanded(child: MealsList()),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
