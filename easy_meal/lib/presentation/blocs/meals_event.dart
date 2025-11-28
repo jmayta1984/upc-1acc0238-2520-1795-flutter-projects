@@ -1,3 +1,5 @@
+import 'package:easy_meal/domain/models/meal.dart';
+
 abstract class MealsEvent {
   const MealsEvent();
 }
@@ -5,4 +7,9 @@ abstract class MealsEvent {
 class GetMealsByCategory extends MealsEvent {
   final String category;
   const GetMealsByCategory(this.category);
+}
+
+class ToggleFavoriteMeal extends MealsEvent {
+  final Meal meal;
+  const ToggleFavoriteMeal(this.meal);
 }

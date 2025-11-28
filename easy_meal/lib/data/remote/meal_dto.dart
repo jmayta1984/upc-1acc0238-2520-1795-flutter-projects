@@ -20,10 +20,6 @@ class MealDto {
   }
 
   Meal toDomain() {
-    return Meal(
-      id: id,
-      name: name,
-      posterPath: posterPath,
-    );
+    return Meal(id: id, name: name, posterPath: posterPath, isFavorite: false);
   }
 }

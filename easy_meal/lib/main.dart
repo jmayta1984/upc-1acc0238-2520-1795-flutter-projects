@@ -1,3 +1,4 @@
+import 'package:easy_meal/data/local/meal_dao.dart';
 import 'package:easy_meal/data/remote/category_service.dart';
 import 'package:easy_meal/data/remote/meal_service.dart';
 import 'package:easy_meal/data/repositories/category_repository_impl.dart';
@@ -25,6 +26,7 @@ class MainApp extends StatelessWidget {
     );
     final MealRepository mealRepository = MealRepositoryImpl(
       service: MealService(),
+      dao: MealDao(),
     );
     return MultiBlocProvider(
       providers: [
@@ -32,7 +34,9 @@ class MainApp extends StatelessWidget {
           create: (context) =>
               CategoriesBloc(repository: repository)..add(GetAllCategories()),
         ),
-        BlocProvider(create:  (context) => MealsBloc(mealRepository: mealRepository)),
+        BlocProvider(
+          create: (context) => MealsBloc(repository: mealRepository),
+        ),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

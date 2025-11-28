@@ -1,5 +1,8 @@
 import 'package:easy_meal/domain/models/meal.dart';
+import 'package:easy_meal/presentation/blocs/meals_bloc.dart';
+import 'package:easy_meal/presentation/blocs/meals_event.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MealCard extends StatelessWidget {
   final Meal meal;
@@ -27,7 +30,13 @@ class MealCard extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          IconButton(onPressed: () {}, icon: Icon(Icons.favorite_border)),
+          IconButton(
+            onPressed: () =>
+                context.read<MealsBloc>().add(ToggleFavoriteMeal(meal)),
+            icon: Icon(
+              meal.isFavorite ? Icons.favorite : Icons.favorite_border,
+            ),
+          ),
         ],
       ),
     );
